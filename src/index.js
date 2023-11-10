@@ -1,3 +1,7 @@
 import './style.scss'
 
-console.log('Hello !');
+// **************** 115) Introduction du projet blog  **************************
+
+
+
+
