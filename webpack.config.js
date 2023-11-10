@@ -20,7 +20,8 @@ module.exports = {
       },
       {
         test: /\.scss$/i,
-        use: ["style-loader", "css-loader", 'sass-loader']
+        use: ["style-loader", "css-loader", 'sass-loader'] /* Les plugins positionnés dans "use" sont exécutés de droite à gauche */
+
       }
     ]
   },
