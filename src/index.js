@@ -1,4 +1,5 @@
-import './style.scss'
+import './assets/styles/styles.scss';
+import "./index.scss"
 
 // **************** 115) Introduction du projet blog  **************************
 
@@ -7,6 +8,7 @@ import './style.scss'
 
 // **************** 117) Utilisation d'assets avec Webpack **************************
 
+// **************** 118) Mise en place des styles pour notre application**************************
 
 
-console.log('indeeex');
+console.log('index');
