@@ -14,5 +14,7 @@ import "./index.scss"
 
 // **************** 120) Mise en place du header et du footer**************************
 
+// **************** 121) Mise en page du formulaire de création d'article **************************
+
 
 console.log('index');
