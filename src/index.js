@@ -12,6 +12,7 @@ import "./index.scss"
 
 // **************** 119) Mise en page du projet **************************
 
+// **************** 120) Mise en place du header et du footer**************************
 
 
 console.log('index');
