@@ -10,5 +10,8 @@ import "./index.scss"
 
 // **************** 118) Mise en place des styles pour notre application**************************
 
+// **************** 119) Mise en page du projet **************************
+
+
 
 console.log('index');
