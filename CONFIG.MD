@@ -1,4 +1,6 @@
 
+Chapitre 115 :
+
 Setup & Config :
 
    - `npm init -y`
@@ -19,6 +21,7 @@ Setup & Config :
       - Penser à l'import du style css dans le point d'entrée de l'application donc index.js (voir dans webpack.config).
 
 
+Chapitre 116 :
 
    - Configurer webpeck.config.js pour du multipages pour que webpack prenne en considération les dfférents points d'entrée.
 
@@ -31,3 +34,6 @@ Setup & Config :
    - Une fois la configuration webpack effectué, on build l'app en exécutant `npm run webpack` pour générer un dossier dist puis `npm start` pour se connecter au serveur Webpack.
 
    
+Chapitre 117 :
+
+   - npm i -D copy-webpack-plugin clean-webpack-plugin
