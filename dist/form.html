@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Form</title>
+<script defer src="form.bundle.js"></script></head>
+
+<body>
+   <a href="./index.html">Accueil</a>
+</body>
+
+</html>
+
+
+<!-- Quand on va build l'application avec webpack, on est pas obligé de respecter la structure, l'architecture que l'on a mis en place dans src. Les fichiers dans build seront de toute façon tous au même niveau -->
+
+<!-- Config webpeck.config.js pour multipages et que webpack prenne en considération les dfférents points d'entrée :  -->
+
+<!-- Le javascript que l'on va crée à partir d'un point d'entrée (webpack) est ce que l'on appelle un chunk. On va donc crée 2 chunk, un pour index.js (mainEntry) et l'autre pour le form (form). Là, on fera attention à bien respecter le path de l'architecture de notre dossier source src. -->
+
+<!-- On déclare les keys filename et chunks dans 2 instances du constructeur HtmlWebpackPlugin -->
