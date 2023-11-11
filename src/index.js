@@ -16,5 +16,9 @@ import "./index.scss"
 
 // **************** 121) Mise en page du formulaire de création d'article **************************
 
+// **************** 122) Mise en place du JavaScript pour le formulaire **************************
+
+
+
 
 console.log('index');
