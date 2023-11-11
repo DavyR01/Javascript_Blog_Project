@@ -7,6 +7,7 @@ module.exports = {
   entry: {
     mainEntry : path.resolve(__dirname, "src/index.js"), // Important
     form : path.resolve(__dirname, "src/form/form.js"),
+    topbar : path.resolve(__dirname, "src/assets/javascripts/topbar.js"),
   },
   output: {
     path: path.resolve(__dirname, "dist"),
@@ -41,12 +42,12 @@ module.exports = {
     new HtmlWebpackPlugin({
       filename: 'index.html', // non obligatoire
       template: path.resolve(__dirname, "src/index.html"), // Important
-      chunks: ["mainEntry"]
+      chunks: ["mainEntry", "topbar"]
     }),
     new HtmlWebpackPlugin({
       filename: 'form.html', // non obligatoire
       template: path.resolve(__dirname, "src/form/form.html"),
-      chunks: ["form"]
+      chunks: ["form", 'topbar']
     })
   ],
   // stats: "minimal",
