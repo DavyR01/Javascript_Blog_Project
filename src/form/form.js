@@ -2,36 +2,38 @@ import '../assets/styles/styles.scss';
 import "./form.scss";
 
 const form = document.querySelector('form');
+const errorElement = document.querySelector('#errors')
+let errors = [];
 
 form.addEventListener('submit', e => {
    e.preventDefault();
    const formData = new FormData(form);
+   const article = Object.fromEntries(formData.entries())
+   if (formIsValid(article)) {
+      const json2 = JSON.stringify(Object.fromEntries(formData.entries()))
+      console.log(json2);
+      // fetch
+   }
+
    console.log(formData);
 
    const entries = formData.entries()
-
    console.log(entries);
-
-   // for (let entry of entries) {
-   //    console.log(entry);
-   // }
-
-   // Pour créer un tableau à partir d'un itérable, on utilise entries hérité de l'objet natif Array. Bien enlever la boucle for...of pour obtenir un résulat :
-
-   // const obj = Array.from(entries).reduce((acc, value) => {
-   //    acc[value[0]] = value[1]
-   //    return acc;
-   // }, {})
-
-   // Alternative : On peut utiliser fromEntries.
-   const obj2 = Object.fromEntries(entries)
-   const json = JSON.stringify(obj2)
-   const json2 = JSON.stringify(Object.fromEntries(formData.entries()))
-
-   
-   // console.log(obj);
-   console.log(obj2);
-   console.log(json);
-   console.log(json2); // Même résultat que json
-
 })
+
+const formIsValid = (article) => {
+   if (!article.author || !article.category || !article.content) {
+      errors.push('Vous devez renseigner tous les champs')
+   } else {
+      errors = []
+   }
+   if (errors.length) {
+      let errorHTML = ''
+      errors.forEach((e) => {
+      errorHTML += `<li>${e}</li>`
+      })
+      errorElement.innerHTML = errorHTML;
+   } else {
+      errorElement.innerHTML = '';
+   }
+}
