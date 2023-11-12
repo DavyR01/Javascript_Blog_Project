@@ -5,14 +5,29 @@ const form = document.querySelector('form');
 const errorElement = document.querySelector('#errors')
 let errors = [];
 
-form.addEventListener('submit', e => {
+form.addEventListener('submit', async e => {
    e.preventDefault();
    const formData = new FormData(form);
    const article = Object.fromEntries(formData.entries())
    if (formIsValid(article)) {
-      const json2 = JSON.stringify(Object.fromEntries(formData.entries()))
-      console.log(json2);
-      // fetch
+      try {
+         const json2 = JSON.stringify(article)
+         console.log(json2);
+
+         const response = await fetch('https://restapi.fr/api/articles', {
+            method: "POST",
+            body: json2, // On envoie notre article au format JSON
+            headers: {
+               "Content-type": 'application/json'
+            }
+         });
+
+         const body = await response.json(); // On attend notre réponse que nous recevons sous forme de promesse. La méthode response.json ne retourne pas un objet JSON mais retourne une promesse qui se résoudra avec une objet JSON si le parsing fonctionne.
+         console.log(body);
+
+      } catch (e) {
+         console.log('e :', e);
+      }
    }
 
    console.log(formData);
@@ -30,10 +45,12 @@ const formIsValid = (article) => {
    if (errors.length) {
       let errorHTML = ''
       errors.forEach((e) => {
-      errorHTML += `<li>${e}</li>`
+         errorHTML += `<li>${e}</li>`
       })
       errorElement.innerHTML = errorHTML;
+      return false
    } else {
       errorElement.innerHTML = '';
+      return true
    }
 }

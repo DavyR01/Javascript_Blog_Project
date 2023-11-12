@@ -18,6 +18,7 @@ import "./index.scss"
 
 // **************** 122) Mise en place du JavaScript pour le formulaire **************************
 
+// **************** 123) Envoi de l'article au serveur **************************
 
 
 
