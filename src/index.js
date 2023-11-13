@@ -20,6 +20,9 @@ import "./index.scss"
 
 // **************** 123) Envoi de l'article au serveur **************************
 
+// **************** 124) Mise en page de la liste des articles **************************
+
+
 
 
 console.log('index');

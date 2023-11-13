@@ -3,6 +3,7 @@
    justify-content: center;
    align-items: center;
    form {
+    background: white;
      width: 700px;
      padding: 4rem;
      box-shadow: var(--box-shadow);
@@ -21,7 +22,7 @@
        }
        input,
        textarea {
-         border: 1px solid var(--divider);
+         border: 1px solid var(--input-border);
          padding: 1rem;
          outline: 0;
          border-radius: 3px;
