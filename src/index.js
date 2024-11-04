@@ -47,12 +47,37 @@ const createArticles = (articles) => {
    console.log(articlesDOM);
    articleContainerElement.innerHTML = "";
    articleContainerElement.append(...articlesDOM);
+   const deleteButtons = articleContainerElement.querySelectorAll('.btn-danger');
+   console.log(deleteButtons);
+   deleteButtons.forEach(button => {
+      button.addEventListener('click', async e => {
+         try {
+            const target = e.target;
+            const articleId = target.dataset.id; //! Il faut utiliser dataset lorsque l'on met des informations sur des éléments HTML
+            const response = await fetch(`https://restapi.fr/api/articles/${articleId}`, {
+               method: 'DELETE'
+            });
+            const body = (await response).json();
+            console.log(body);
+            fetchArticles();
+
+         } catch (error) {
+            console.log('error occured during delete article', error);
+         }
+      });
+   });
 };
 
 const fetchArticles = async () => {
    try {
       const response = await fetch('https://restapi.fr/api/articles');
-      const articles = await response.json();
+      let articles = await response.json();
+
+      if (!Array.isArray(articles)) {
+         articles = [articles];
+      }
+      console.log(typeof (articles));
+
       console.log(articles);
       createArticles(articles);
 
