@@ -5,4 +5,4 @@ module.exports = {
        debug: true,
        targets: "> 30%, not dead"
    }]]
-}
+};
