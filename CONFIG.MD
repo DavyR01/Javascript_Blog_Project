@@ -37,3 +37,9 @@ Chapitre 116 :
 Chapitre 117 :
 
    - npm i -D copy-webpack-plugin clean-webpack-plugin
+
+
+Chapitre 130 :
+
+# A SAVOIR :
+   1) Il faut éviter les largeurs fixes pour les conteneurs dans le CSS pour permettre un design responsive
