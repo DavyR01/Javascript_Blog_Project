@@ -1,5 +1,5 @@
 import './assets/styles/styles.scss';
-import "./index.scss"
+import "./index.scss";
 
 // **************** 115) Introduction du projet blog  **************************
 
@@ -22,6 +22,46 @@ import "./index.scss"
 
 // **************** 124) Mise en page de la liste des articles **************************
 
+// **************** 128) Affichage de la liste des articles **************************
+
+const articleContainerElement = document.querySelector('.articles-container');
+
+const createArticles = (articles) => {
+   const articlesDOM = articles.map((article) => {
+      // console.log(article);
+      const articleDOM = document.createElement('div');
+      articleDOM.classList.add("article");
+      articleDOM.innerHTML = `
+      <img src="${article.imagee}" alt="profile" />
+               <h2>${article.title}</h2>
+               <p class="article-author">${article.author} - ${article.category}</p>
+               <p class="article-content">
+               ${article.content}
+               </p>
+               <div class="article-actions">
+                  <button class="btn btn-danger" data-id=${article._id}>Supprimer</button>
+               </div>
+      `;
+      return articleDOM;
+   });
+   console.log(articlesDOM);
+   articleContainerElement.innerHTML = "";
+   articleContainerElement.append(...articlesDOM);
+};
+
+const fetchArticles = async () => {
+   try {
+      const response = await fetch('https://restapi.fr/api/articles');
+      const articles = await response.json();
+      console.log(articles);
+      createArticles(articles);
+
+   } catch (error) {
+      console.log("error during fetch articles", error);
+   }
+};
+
+fetchArticles();
 
 
 

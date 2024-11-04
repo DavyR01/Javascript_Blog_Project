@@ -35,6 +35,12 @@
       background: white;
       color: var(--primary);
    }
+
+   &-danger {
+      border: 1px solid var(--divider);
+      background: var(--error);
+      color: var(--divider);
+   }
 }
 
 .text {
