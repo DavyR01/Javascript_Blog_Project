@@ -5,7 +5,41 @@ const form = document.querySelector('form');
 const errorElement = document.querySelector('#errors');
 const btnCancel = document.querySelector('.btn-secondary');
 
+let articleId;
 let errors = [];
+
+const fillForm = article => {
+   const author = document.querySelector('input[name="author"]');
+   const imagee = document.querySelector('input[name="imagee"]');
+   const category = document.querySelector('input[name="category"]');
+   const title = document.querySelector('input[name="title"]');
+   const content = document.querySelector("textarea");
+
+   author.value = article.author || "";
+   imagee.value = article.img || "";
+   category.value = article.category || "";
+   title.value = article.title || "";
+   content.value = article.content || "";
+};
+
+const initForm = async () => {
+   const params = new URL(location.href);
+   articleId = params.searchParams.get('id');
+   console.log(articleId);
+
+   if (articleId) {
+      const response = await fetch(`https://restapi.fr/api/articles/${articleId}`);
+      console.log(response);
+
+      if (response.status < 300) {
+         const article = await response.json();
+         fillForm(article);
+         console.log(article);
+      }
+   }
+};
+
+initForm();
 
 btnCancel.addEventListener('click', () => {
    location.assign("./index.html");
@@ -18,15 +52,26 @@ form.addEventListener('submit', async e => {
    if (formIsValid(article)) {
       try {
          const json2 = JSON.stringify(article);
+         let response;
          console.log(json2);
 
-         const response = await fetch('https://restapi.fr/api/articles', {
-            method: "POST",
-            body: json2, // On envoie notre article au format JSON
-            headers: {
-               "Content-type": 'application/json'
-            }
-         });
+         if (articleId) {
+            response = await fetch(`https://restapi.fr/api/articles/${articleId}`, {
+               method: "PATCH",
+               body: json2,
+               headers: {
+                  "Content-type": 'application/json'
+               }
+            });
+         } else {
+            response = await fetch('https://restapi.fr/api/articles', {
+               method: "POST",
+               body: json2, // On envoie notre article au format JSON
+               headers: {
+                  "Content-type": 'application/json'
+               }
+            });
+         }
 
          if (response.status < 299) {
             location.assign("./index.html");

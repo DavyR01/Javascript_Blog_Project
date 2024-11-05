@@ -29,12 +29,13 @@ const articleContainerElement = document.querySelector('.articles-container');
 
 const createArticles = (articles) => {
    const articlesDOM = articles.map((article) => {
-      const datePublication = new Date(article.createdAt).toLocaleDateString('fr-FR',  {
-         weekday:"long",
-         day: "2-digit",
-         month:"long",
-         year:"numeric"
-      });
+      const datePublication = new Date(article.createdAt).toLocaleDateString('fr-FR',
+         {
+            weekday: "long",
+            day: "2-digit",
+            month: "long",
+            year: "numeric"
+         });
 
       // console.log(article);
       const articleDOM = document.createElement('div');
@@ -48,6 +49,7 @@ const createArticles = (articles) => {
                </p>
                <div class="article-actions">
                   <button class="btn btn-danger" data-id=${article._id}>Supprimer</button>
+                  <button class="btn btn-primary" data-id=${article._id}>Modifier</button>
                </div>
       `;
       return articleDOM;
@@ -55,7 +57,10 @@ const createArticles = (articles) => {
    console.log(articlesDOM);
    articleContainerElement.innerHTML = "";
    articleContainerElement.append(...articlesDOM);
+
    const deleteButtons = articleContainerElement.querySelectorAll('.btn-danger');
+   const editButtons = articleContainerElement.querySelectorAll('.btn-primary');
+
    console.log(deleteButtons);
    deleteButtons.forEach(button => {
       button.addEventListener('click', async e => {
@@ -72,6 +77,14 @@ const createArticles = (articles) => {
          } catch (error) {
             console.log('error occured during delete article', error);
          }
+      });
+   });
+
+   editButtons.forEach(button => {
+      button.addEventListener('click', e => {
+         const target = e.target;
+         const articleId = target.dataset.id;
+         location.assign(`/form.html?id=${articleId}`);
       });
    });
 };
