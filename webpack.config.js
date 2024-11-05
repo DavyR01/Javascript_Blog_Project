@@ -16,7 +16,7 @@ module.exports = {
 
    //   resolve: {
    //    extensions: ['.js'],
-   //    modules: [path.resolve(__dirname, '.'), 'node_modules']
+   //    modules: [path.resolve(__dirname, '.'), 'node_modules'] //! Le 'context' de Webpack, s'il n'est pas spécifié, est défini comme le répertoire contenant le fichier de configuration webpack.
    //   },
 
    module: {

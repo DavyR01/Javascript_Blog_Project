@@ -46,4 +46,5 @@ Chapitre 130 :
    2) Par défaut, un bouton à l'intérieur d'une balise <form>, entraîne la soumission du formulaire sur un clic.
    3) Tout attribut HTML qui commence par data- sera récupérable en JavaScript sur la propriété dataset
    4) Dans le contexte d'utilisation de webpack, toutes les variables déclarées en dehors d'une fonction ne sont pas sur le contexte global d'exécution car webpack englobe tous les fichiers Javascript dans des "modules" qui sont assimilables à des fonctions.
+   5) La commande `"preview": "npm run build && npx http-server dist"` permet de simuler un environnement de production.
 

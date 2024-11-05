@@ -5,9 +5,11 @@
    "main": "index.js",
    "scripts": {
       "test": "echo \"Error: no test specified\" && exit 1",
-      "webpack": "webpack",
+      "build": "webpack",
+      "buildProd": "webpack --mode=production",
       "start": "webpack serve",
-      "lint": "eslint . --fix"
+      "lint": "eslint . --fix",
+      "preview": "npx webpack && npx http-server dist"
    },
    "keywords": [],
    "author": "",
