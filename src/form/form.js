@@ -3,7 +3,13 @@ import "./form.scss";
 
 const form = document.querySelector('form');
 const errorElement = document.querySelector('#errors');
+const btnCancel = document.querySelector('.btn-secondary');
+
 let errors = [];
+
+btnCancel.addEventListener('click', () => {
+   location.assign("./index.html");
+});
 
 form.addEventListener('submit', async e => {
    e.preventDefault();
@@ -22,6 +28,10 @@ form.addEventListener('submit', async e => {
             }
          });
 
+         if (response.status < 299) {
+            location.assign("./index.html");
+         }
+
          const body = await response.json(); // On attend notre réponse que nous recevons sous forme de promesse. La méthode response.json ne retourne pas un objet JSON mais retourne une promesse qui se résoudra avec une objet JSON si le parsing fonctionne.
          console.log(body);
 
@@ -37,7 +47,8 @@ form.addEventListener('submit', async e => {
 });
 
 const formIsValid = (article) => {
-   if (!article.author || !article.category || !article.imagee || !article.title || !article.content)  {
+   errors = [];
+   if (!article.author || !article.category || !article.imagee || !article.title || !article.content) {
       errors.push('Vous devez renseigner tous les champs');
    } else {
       errors = [];

@@ -26,15 +26,23 @@ import "./index.scss";
 
 const articleContainerElement = document.querySelector('.articles-container');
 
+
 const createArticles = (articles) => {
    const articlesDOM = articles.map((article) => {
+      const datePublication = new Date(article.createdAt).toLocaleDateString('fr-FR',  {
+         weekday:"long",
+         day: "2-digit",
+         month:"long",
+         year:"numeric"
+      });
+
       // console.log(article);
       const articleDOM = document.createElement('div');
       articleDOM.classList.add("article");
       articleDOM.innerHTML = `
       <img src="${article.img}" alt="profile" />
                <h2>${article.title}</h2>
-               <p class="article-author">${article.author} - ${article.category}</p>
+               <p class="article-author">${article.author} - ${datePublication}</p>
                <p class="article-content">
                ${article.content}
                </p>
