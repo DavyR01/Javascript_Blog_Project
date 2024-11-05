@@ -1,3 +1,4 @@
+import { openModal } from './assets/javascripts/modal';
 import './assets/styles/styles.scss';
 import "./index.scss";
 
@@ -31,10 +32,10 @@ let filter;
 let articles;
 let sortBy = 'desc';
 
-selectElement.addEventListener('change', e=>{
+selectElement.addEventListener('change', e => {
    sortBy = selectElement.value;
    fetchArticles();
-   console.log(sortBy);   
+   console.log(sortBy);
 });
 
 
@@ -82,19 +83,26 @@ const createArticles = () => {
 
    console.log(deleteButtons);
    deleteButtons.forEach(button => {
-      button.addEventListener('click', async e => {
-         try {
-            const target = e.target;
-            const articleId = target.dataset.id; //! Il faut utiliser dataset lorsque l'on met des informations sur des éléments HTML
-            const response = await fetch(`https://restapi.fr/api/articles/${articleId}`, {
-               method: 'DELETE'
-            });
-            const body = (await response).json();
-            console.log(body);
-            fetchArticles();
+      button.addEventListener('click', async () => {
+         const result = await openModal(
+            'Etes vous sur de vouloir supprimer votre article ?'
+         );
+         if (result === true) {
+            button.addEventListener('click', async e => {
+               try {
+                  const target = e.target;
+                  const articleId = target.dataset.id; //! Il faut utiliser dataset lorsque l'on met des informations sur des éléments HTML
+                  const response = await fetch(`https://restapi.fr/api/articles/${articleId}`, {
+                     method: 'DELETE'
+                  });
+                  const body = (await response).json();
+                  console.log(body);
+                  fetchArticles();
 
-         } catch (error) {
-            console.log('error occured during delete article', error);
+               } catch (error) {
+                  console.log('error occured during delete article', error);
+               }
+            });
          }
       });
    });
