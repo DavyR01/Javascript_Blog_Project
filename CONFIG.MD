@@ -45,5 +45,5 @@ Chapitre 130 :
    1) Il faut éviter les largeurs fixes pour les conteneurs dans le CSS pour permettre un design responsive.
    2) Par défaut, un bouton à l'intérieur d'une balise <form>, entraîne la soumission du formulaire sur un clic.
    3) Tout attribut HTML qui commence par data- sera récupérable en JavaScript sur la propriété dataset
-   4) Dans le contexte d'utilisation de webpack, toutes les variables déclarées en dehors d'une fonction ne sont pas sur le contexte global d'exécution car webpack englobes tous les fichiers Javascript dans des "modules" qui sont assimilables à des fonctions.
+   4) Dans le contexte d'utilisation de webpack, toutes les variables déclarées en dehors d'une fonction ne sont pas sur le contexte global d'exécution car webpack englobe tous les fichiers Javascript dans des "modules" qui sont assimilables à des fonctions.
 

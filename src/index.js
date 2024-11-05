@@ -26,8 +26,17 @@ import "./index.scss";
 
 const articleContainerElement = document.querySelector('.articles-container');
 const categoriesContainerElement = document.querySelector('.categories');
+const selectElement = document.querySelector("select");
 let filter;
 let articles;
+let sortBy = 'desc';
+
+selectElement.addEventListener('change', e=>{
+   sortBy = selectElement.value;
+   fetchArticles();
+   console.log(sortBy);   
+});
+
 
 const createArticles = () => {
    const articlesDOM = articles
@@ -103,9 +112,9 @@ const displayMenuCategories = (categoriesArr) => {
    const liElements = categoriesArr.map((categoryElem) => {
       const li = document.createElement('li');
       li.innerHTML = `${categoryElem[0]} ( <strong>${categoryElem[1]}</strong> )`;
-      // if (categoryElem[0] === filter) {
-      //    li.classList.add('active');
-      // }
+      if (categoryElem[0] === filter) {
+         li.classList.add('active');
+      }
       li.addEventListener('click', () => {
          if (filter === categoryElem[0]) {
             filter = null;
@@ -145,6 +154,7 @@ const createMenuCategories = () => {
       .map((category) => {
          return [category, categories[category]];
       })
+      //! tri côté frontend
       .sort((c1, c2) => c1[0].localeCompare(c2[0]));
    console.log(categoriesArr);
    displayMenuCategories(categoriesArr);
@@ -152,7 +162,7 @@ const createMenuCategories = () => {
 
 const fetchArticles = async () => {
    try {
-      const response = await fetch('https://restapi.fr/api/articles');
+      const response = await fetch(`https://restapi.fr/api/articles?sort=createdAt:${sortBy}`); //! tri effectué par le serveur côté backend.
       articles = await response.json(); //? articles est déclaré en dehors des fonctions car on a besoin de l'utiliser dans un contexte plus global au début du fichier.
 
       if (!Array.isArray(articles)) {
