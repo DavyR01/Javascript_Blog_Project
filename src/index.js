@@ -26,22 +26,31 @@ import "./index.scss";
 
 const articleContainerElement = document.querySelector('.articles-container');
 const categoriesContainerElement = document.querySelector('.categories');
+let filter;
+let articles;
 
+const createArticles = () => {
+   const articlesDOM = articles
+      .filter((article) => {
+         if (filter) {
+            return article.category === filter;
+         } else {
+            return true;
+         }
+      })
+      .map((article) => {
+         const datePublication = new Date(article.createdAt).toLocaleDateString('fr-FR',
+            {
+               weekday: "long",
+               day: "2-digit",
+               month: "long",
+               year: "numeric"
+            });
 
-const createArticles = (articles) => {
-   const articlesDOM = articles.map((article) => {
-      const datePublication = new Date(article.createdAt).toLocaleDateString('fr-FR',
-         {
-            weekday: "long",
-            day: "2-digit",
-            month: "long",
-            year: "numeric"
-         });
-
-      // console.log(article);
-      const articleDOM = document.createElement('div');
-      articleDOM.classList.add("article");
-      articleDOM.innerHTML = `
+         // console.log(article);
+         const articleDOM = document.createElement('div');
+         articleDOM.classList.add("article");
+         articleDOM.innerHTML = `
       <img src="${article.img}" alt="profile" />
                <h2>${article.title}</h2>
                <p class="article-author">${article.author} - ${datePublication}</p>
@@ -53,8 +62,8 @@ const createArticles = (articles) => {
                   <button class="btn btn-primary" data-id=${article._id}>Modifier</button>
                </div>
       `;
-      return articleDOM;
-   });
+         return articleDOM;
+      });
    console.log(articlesDOM);
    articleContainerElement.innerHTML = "";
    articleContainerElement.append(...articlesDOM);
@@ -97,20 +106,20 @@ const displayMenuCategories = (categoriesArr) => {
       // if (categoryElem[0] === filter) {
       //    li.classList.add('active');
       // }
-      // li.addEventListener('click', () => {
-      //    if (filter === categoryElem[0]) {
-      //       filter = null;
-      //       li.classList.remove('active');
-      //       createArticles();
-      //    } else {
-      //       filter = categoryElem[0];
-      //       liElements.forEach((li) => {
-      //          li.classList.remove('active');
-      //       });
-      //       li.classList.add('active');
-      //       createArticles();
-      //    }
-      // });
+      li.addEventListener('click', () => {
+         if (filter === categoryElem[0]) {
+            filter = null;
+            li.classList.remove('active');
+            createArticles();
+         } else {
+            filter = categoryElem[0];
+            liElements.forEach((li) => {
+               li.classList.remove('active');
+            });
+            li.classList.add('active');
+            createArticles();
+         }
+      });
       return li;
    });
 
@@ -120,7 +129,7 @@ const displayMenuCategories = (categoriesArr) => {
 
 };
 
-const createMenuCategories = (articles) => {
+const createMenuCategories = () => {
    const categories = articles.reduce((acc, article) => {
       if (acc[article.category]) {
          acc[article.category]++;
@@ -144,7 +153,7 @@ const createMenuCategories = (articles) => {
 const fetchArticles = async () => {
    try {
       const response = await fetch('https://restapi.fr/api/articles');
-      let articles = await response.json();
+      articles = await response.json(); //? articles est déclaré en dehors des fonctions car on a besoin de l'utiliser dans un contexte plus global au début du fichier.
 
       if (!Array.isArray(articles)) {
          articles = [articles];
@@ -152,8 +161,8 @@ const fetchArticles = async () => {
       console.log(typeof (articles));
 
       console.log(articles);
-      createArticles(articles);
-      createMenuCategories(articles);
+      createArticles();
+      createMenuCategories();
 
    } catch (error) {
       console.log("error during fetch articles", error);
