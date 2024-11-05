@@ -48,4 +48,4 @@ export function openModal(question) {
          calc.remove();
       });
    });
-}
+} //! Présence de closures dans openModal

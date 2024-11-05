@@ -83,27 +83,27 @@ const createArticles = () => {
 
    console.log(deleteButtons);
    deleteButtons.forEach(button => {
-      button.addEventListener('click', async () => {
+      button.addEventListener('click', async (e) => {
          const result = await openModal(
             'Etes vous sur de vouloir supprimer votre article ?'
          );
-         // if (result === true) {
-         //    button.addEventListener('click', async e => {
-         //       try {
-         //          const target = e.target;
-         //          const articleId = target.dataset.id; //! Il faut utiliser dataset lorsque l'on met des informations sur des éléments HTML
-         //          const response = await fetch(`https://restapi.fr/api/articles/${articleId}`, {
-         //             method: 'DELETE'
-         //          });
-         //          const body = (await response).json();
-         //          console.log(body);
-         //          fetchArticles();
+         console.log(result);
 
-         //       } catch (error) {
-         //          console.log('error occured during delete article', error);
-         //       }
-         //    });
-         // }
+         if (result === true) {
+            try {
+               const target = e.target;
+               const articleId = target.dataset.id; //! Il faut utiliser dataset lorsque l'on met des informations sur des éléments HTML
+               const response = await fetch(`https://restapi.fr/api/articles/${articleId}`, {
+                  method: 'DELETE'
+               });
+               const body = (await response).json();
+               console.log(body);
+               fetchArticles();
+
+            } catch (error) {
+               console.log('error occured during delete article', error);
+            }
+         }
       });
    });
 
