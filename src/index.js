@@ -25,6 +25,7 @@ import "./index.scss";
 // **************** 128) Affichage de la liste des articles **************************
 
 const articleContainerElement = document.querySelector('.articles-container');
+const categoriesContainerElement = document.querySelector('.categories');
 
 
 const createArticles = (articles) => {
@@ -89,6 +90,57 @@ const createArticles = (articles) => {
    });
 };
 
+const displayMenuCategories = (categoriesArr) => {
+   const liElements = categoriesArr.map((categoryElem) => {
+      const li = document.createElement('li');
+      li.innerHTML = `${categoryElem[0]} ( <strong>${categoryElem[1]}</strong> )`;
+      // if (categoryElem[0] === filter) {
+      //    li.classList.add('active');
+      // }
+      // li.addEventListener('click', () => {
+      //    if (filter === categoryElem[0]) {
+      //       filter = null;
+      //       li.classList.remove('active');
+      //       createArticles();
+      //    } else {
+      //       filter = categoryElem[0];
+      //       liElements.forEach((li) => {
+      //          li.classList.remove('active');
+      //       });
+      //       li.classList.add('active');
+      //       createArticles();
+      //    }
+      // });
+      return li;
+   });
+
+   categoriesContainerElement.innerHTML = '';
+   categoriesContainerElement.append(...liElements);
+   console.log(liElements);
+
+};
+
+const createMenuCategories = (articles) => {
+   const categories = articles.reduce((acc, article) => {
+      if (acc[article.category]) {
+         acc[article.category]++;
+      } else {
+         acc[article.category] = 1;
+      }
+
+      return acc;
+   }, {});
+   console.log(categories);
+
+   const categoriesArr = Object.keys(categories)
+      .map((category) => {
+         return [category, categories[category]];
+      })
+      .sort((c1, c2) => c1[0].localeCompare(c2[0]));
+   console.log(categoriesArr);
+   displayMenuCategories(categoriesArr);
+};
+
 const fetchArticles = async () => {
    try {
       const response = await fetch('https://restapi.fr/api/articles');
@@ -101,6 +153,7 @@ const fetchArticles = async () => {
 
       console.log(articles);
       createArticles(articles);
+      createMenuCategories(articles);
 
    } catch (error) {
       console.log("error during fetch articles", error);
