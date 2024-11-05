@@ -60,6 +60,7 @@ module.exports = {
 
    //? stats: "minimal",
    devtool: "source-map",
+   // mode: "production",
    mode: "development",
    devServer: {
       static: path.resolve(__dirname, './dist'),
@@ -67,5 +68,13 @@ module.exports = {
       watchFiles: ['./src/**'], //! Important
       port: 4000,
       hot: true,
-   }
+   },
+
+   //! performance permet de override les warnings sur la taille des fichiers dans les 2 modes (dev et prod). 
+   //? En mode développement, l'accent est mis sur la rapidité de compilation et le débogage (avec des source maps détaillées), tandis qu'en mode production, l'accent est mis sur l'optimisation des performances.
+   performance: {
+      hints: false, // Désactive les avertissements
+      maxAssetSize: 512000, // Augmente la limite à 512 Ko
+      maxEntrypointSize: 512000, // Augmente la limite pour les points d'entrée
+    },
 };

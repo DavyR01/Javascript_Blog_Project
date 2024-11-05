@@ -1,5 +1,5 @@
 
-Chapitre 115 :
+## Chapitre 115 :
 
 Setup & Config :
 
@@ -21,7 +21,7 @@ Setup & Config :
       - Penser à l'import du style css dans le point d'entrée de l'application donc index.js (voir dans webpack.config).
 
 
-Chapitre 116 :
+## Chapitre 116 :
 
    - Configurer webpeck.config.js pour du multipages pour que webpack prenne en considération les dfférents points d'entrée.
 
@@ -34,12 +34,12 @@ Chapitre 116 :
    - Une fois la configuration webpack effectué, on build l'app en exécutant `npm run webpack` pour générer un dossier dist puis `npm start` pour se connecter au serveur Webpack.
 
    
-Chapitre 117 :
+## Chapitre 117 :
 
    - npm i -D copy-webpack-plugin clean-webpack-plugin
 
 
-Chapitre 130 :
+## Chapitre 130 :
 
 # A SAVOIR :
    1) Il faut éviter les largeurs fixes pour les conteneurs dans le CSS pour permettre un design responsive.
@@ -48,3 +48,9 @@ Chapitre 130 :
    4) Dans le contexte d'utilisation de webpack, toutes les variables déclarées en dehors d'une fonction ne sont pas sur le contexte global d'exécution car webpack englobe tous les fichiers Javascript dans des "modules" qui sont assimilables à des fonctions.
    5) La commande `"preview": "npm run build && npx http-server dist"` permet de simuler un environnement de production.
 
+# MODE PRODUCTION VS DEVELOPMENT :
+   1) En mode développement : source maps détaillées, code non minifié, HMR activé.
+      En mode production : optimisations activées, minification, etc.
+   2) Pour une meilleure gestion, il est souvent conseillé de créer des fichiers de configuration séparés pour le développement et la production. Par exemple :
+   **webpack.dev.js** pour le développement
+   **webpack.prod.js** pour la production
