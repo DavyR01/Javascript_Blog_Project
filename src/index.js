@@ -124,12 +124,15 @@ const displayMenuCategories = (categoriesArr) => {
          li.classList.add('active');
       }
       li.addEventListener('click', () => {
+         // debugger; //! Pour debugger avec le navigateur
+         console.log("Hola !");
          if (filter === categoryElem[0]) {
             filter = null;
             li.classList.remove('active');
             createArticles();
          } else {
             filter = categoryElem[0];
+            // filter = categoriesArr[0]; //? Mise en place d'une erreur volontairement pour tester le debugger.
             liElements.forEach((li) => {
                li.classList.remove('active');
             });
