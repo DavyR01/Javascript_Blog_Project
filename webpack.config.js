@@ -68,6 +68,9 @@ module.exports = {
       watchFiles: ['./src/**'], //! Important
       port: 4000,
       hot: true,
+      allowedHosts: 'all', // Permet tous les hôtes
+      host: '0.0.0.0', // Écoute sur toutes les interfaces réseau
+      historyApiFallback: true, // Gère les routes SPA
    },
 
    //! performance permet de override les warnings sur la taille des fichiers dans les 2 modes (dev et prod). 
