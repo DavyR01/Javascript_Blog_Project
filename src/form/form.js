@@ -17,7 +17,7 @@ const fillForm = article => {
    const content = document.querySelector("textarea");
 
    author.value = article.author || "";
-   imagee.value = article.img || "";
+   imagee.value = article.imagee || "";
    category.value = article.category || "";
    title.value = article.title || "";
    content.value = article.content || "";
