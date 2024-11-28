@@ -1,7 +1,8 @@
 
 
 # Projet JavaScript complet sous forme de réalisation d'un BLOG !
-## Etapes
+
+## Objectifs & missions
 
 1) Création plusieurs bundles avec Webpack pour avoir un bundle par page.
 
@@ -15,3 +16,10 @@
 
 6) Mise en place un menu de navigation responsive (un menu différent uniquement sur mobile) en utilisant du JavaScript.
 
+# TIPS
+
+1) Pour upgrader tous les packages et dépendances :
+- Installer `npm-check-updates` et lancer `ncu -u` ou `npx npm-check-updates --upgrade`
+- Bien penser ensuite à mettre à jour le packagelock.json avec `npm i` car il ne set met pas à jour automatiquement.
+
+---
