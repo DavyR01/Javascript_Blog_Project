@@ -10,7 +10,7 @@
       "start": "webpack serve --mode=development",
       "startprod": "webpack serve --mode=production",
       "lint": "eslint . --fix",
-      "preview": "npx webpack && npx http-server dist"
+      "previewprod": "npm run buildprod && npx http-server dist"
    },
    "keywords": [],
    "author": "",
@@ -39,7 +39,7 @@
    "json-comments": {
       "tips": "Please install the JsonComments plugin to enable commenting functionality for JSON files, see: https://github.com/zhangfisher/json_comments_extension",
       "package.json": {
-         "scripts.preview": "On doit générer un dossier dist en compilant avec la commande build pour que la commande \"npx http-server dist\" fonctionne seul."
+         "scripts.previewprod": "On doit générer un dossier dist en compilant avec la commande build pour que la commande \"npx http-server dist\" fonctionne seul."
       }
    }
 }
