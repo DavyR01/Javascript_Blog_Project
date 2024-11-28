@@ -2,6 +2,7 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
    entry: {
@@ -30,7 +31,10 @@ module.exports = {
          },
          {
             test: /\.scss$/i,
-            use: ["style-loader", "css-loader", 'sass-loader'] /* Les plugins positionnés dans "use" sont exécutés de droite à gauche */
+            use: [
+               MiniCssExtractPlugin.loader,
+               "css-loader",
+               'sass-loader'] /* Les plugins positionnés dans "use" sont exécutés de droite à gauche */
 
          }
       ]
@@ -55,7 +59,10 @@ module.exports = {
          filename: 'form.html', //? non obligatoire
          template: path.resolve(__dirname, "src/form/form.html"),
          chunks: ["form", 'topbar']
-      })
+      }),
+      new MiniCssExtractPlugin({
+         filename: '[name].[contenthash].css',
+      }),
    ],
 
    //? stats: "minimal",
@@ -79,5 +86,5 @@ module.exports = {
       hints: false, // Désactive les avertissements
       maxAssetSize: 512000, // Augmente la limite à 512 Ko
       maxEntrypointSize: 512000, // Augmente la limite pour les points d'entrée
-    },
+   },
 };
