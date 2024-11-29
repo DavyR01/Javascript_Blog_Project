@@ -42,5 +42,10 @@
       "package.json": {
          "scripts.previewprod": "On doit générer un dossier dist en compilant avec la commande build pour que la commande \"npx http-server dist\" fonctionne seul."
       }
+   },
+   "dependencies": {
+      "node-cron": "^3.0.3",
+      "path-browserify": "^1.0.1",
+      "process": "^0.11.10"
    }
 }

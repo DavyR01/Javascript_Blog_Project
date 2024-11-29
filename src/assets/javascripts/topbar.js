@@ -1,5 +1,3 @@
-console.log('top bar');
-
 const iconMobile = document.querySelector(".header-menu-icon");
 const headerMenu = document.querySelector(".header-menu");
 let isMenuOpen = false;

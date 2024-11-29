@@ -3,6 +3,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const webpack = require('webpack');
 
 module.exports = {
    entry: {
@@ -39,7 +40,13 @@ module.exports = {
          }
       ]
    },
-
+   resolve: {
+      fallback: {
+         "path": require.resolve("path-browserify"),
+         "child_process": false,
+         "process": require.resolve("process/browser")
+      }
+   },
    plugins: [
       new CleanWebpackPlugin(),
       new CopyWebpackPlugin({
@@ -63,6 +70,9 @@ module.exports = {
       new MiniCssExtractPlugin({
          filename: '[name].[contenthash].css',
       }),
+      new webpack.ProvidePlugin({
+         process: 'process/browser',
+      })
    ],
 
    //? stats: "minimal",

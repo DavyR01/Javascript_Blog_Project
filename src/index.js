@@ -1,19 +1,20 @@
 import { openModal } from './assets/javascripts/modal';
 import './assets/styles/styles.scss';
+import { scheduleShutdown } from './cron.js';
 import "./index.scss";
+import './logdraft.js';
 
-// **************** 115) Introduction du projet blog  **************************
-
+// **************** 115) Introduction du projet blog **************************
 
 // **************** 116) Configuration de Webpack pour le multi pages **************************
 
 // **************** 117) Utilisation d'assets avec Webpack **************************
 
-// **************** 118) Mise en place des styles pour notre application**************************
+// **************** 118) Mise en place des styles pour notre application **************************
 
 // **************** 119) Mise en page du projet **************************
 
-// **************** 120) Mise en place du header et du footer**************************
+// **************** 120) Mise en place du header et du footer **************************
 
 // **************** 121) Mise en page du formulaire de création d'article **************************
 
@@ -192,6 +193,4 @@ const fetchArticles = async () => {
 
 fetchArticles();
 
-
-
-console.log('index');
+scheduleShutdown(); 
