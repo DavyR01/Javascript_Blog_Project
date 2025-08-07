@@ -1,6 +1,7 @@
 import { openModal } from './assets/javascripts/modal';
 import './assets/styles/styles.scss';
 import { scheduleShutdown } from './cron.js';
+import { fakeArticles } from './datas/datas.js';
 import "./index.scss";
 import './logdraft.js';
 
@@ -180,6 +181,9 @@ const fetchArticles = async () => {
       if (!Array.isArray(articles)) {
          articles = [articles];
       }
+
+      articles.unshift(...fakeArticles);
+
       console.log(typeof (articles));
 
       console.log(articles);
