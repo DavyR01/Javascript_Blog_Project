@@ -184,6 +184,14 @@ const fetchArticles = async () => {
 
       articles.unshift(...fakeArticles);
 
+      articles.sort((a, b) => {
+         if (sortBy === 'desc') {
+            return new Date(b.createdAt) - new Date(a.createdAt);
+         } else {
+            return new Date(a.createdAt) - new Date(b.createdAt);
+         }
+      });
+
       console.log(typeof (articles));
 
       console.log(articles);
