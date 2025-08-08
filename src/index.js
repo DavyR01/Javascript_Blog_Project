@@ -1,7 +1,7 @@
 import { openModal } from './assets/javascripts/modal';
 import './assets/styles/styles.scss';
 import { scheduleShutdown } from './cron.js';
-import { fakeArticles } from './datas/datas.js';
+import { getFakeArticles, setFakeArticles } from './datas/datas.js';
 import "./index.scss";
 import './logdraft.js';
 
@@ -97,6 +97,7 @@ const createArticles = () => {
                const index = fakeArticles.findIndex(a => a._id === articleId);
                if (index !== -1) {
                   fakeArticles.splice(index, 1);
+                  setFakeArticles(fakeArticles);
                   fetchArticles();
                }
             } else {
@@ -178,6 +179,8 @@ const createMenuCategories = () => {
    displayMenuCategories(categoriesArr);
 };
 
+let fakeArticles = getFakeArticles();
+
 const fetchArticles = async () => {
    try {
       const response = await fetch(`https://restapi.fr/api/articles?sort=createdAt:${sortBy}`); //! tri effectué par le serveur côté backend.
@@ -187,6 +190,7 @@ const fetchArticles = async () => {
          articles = [articles];
       }
 
+      fakeArticles = getFakeArticles();
       articles.unshift(...fakeArticles);
 
       articles.sort((a, b) => {

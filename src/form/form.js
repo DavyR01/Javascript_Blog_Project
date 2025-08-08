@@ -1,6 +1,7 @@
 import { openModal } from '../assets/javascripts/modal';
 import '../assets/styles/styles.scss';
 import "./form.scss";
+import { getFakeArticles, setFakeArticles } from '../datas/datas.js';
 
 const form = document.querySelector('form');
 const errorElement = document.querySelector('#errors');
@@ -8,6 +9,8 @@ const btnCancel = document.querySelector('.btn-secondary');
 
 let articleId;
 let errors = [];
+
+let fakeArticles = getFakeArticles();
 
 const fillForm = article => {
    const author = document.querySelector('input[name="author"]');
@@ -93,6 +96,15 @@ form.addEventListener('submit', async e => {
 
    const entries = formData.entries();
    console.log(entries);
+
+   if (articleId && articleId.startsWith("fake-article-")) {
+      const index = fakeArticles.findIndex(a => a._id === articleId);
+      if (index !== -1) {
+         fakeArticles[index] = { ...fakeArticles[index], ...article };
+         setFakeArticles(fakeArticles);
+         location.assign("./index.html");
+      }
+   }
 });
 
 const formIsValid = (article) => {

@@ -1,4 +1,4 @@
-export const fakeArticles = [
+export const defaultFakeArticles = [
    {
       author: "Julie Martin",
       imagee: "https://images.unsplash.com/photo-1506744038136-46273834b3fb",
@@ -36,3 +36,12 @@ export const fakeArticles = [
       _id: "fake-article-7"
    },
 ];
+
+export function getFakeArticles() {
+   const stored = localStorage.getItem('fakeArticles');
+   return stored ? JSON.parse(stored) : [...defaultFakeArticles];
+}
+
+export function setFakeArticles(articles) {
+   localStorage.setItem('fakeArticles', JSON.stringify(articles));
+}
