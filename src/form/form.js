@@ -1,7 +1,7 @@
 import { openModal } from '../assets/javascripts/modal';
 import '../assets/styles/styles.scss';
-import "./form.scss";
 import { getFakeArticles, setFakeArticles } from '../datas/datas.js';
+import "./form.scss";
 
 const form = document.querySelector('form');
 const errorElement = document.querySelector('#errors');
@@ -32,13 +32,16 @@ const initForm = async () => {
    console.log(articleId);
 
    if (articleId) {
-      const response = await fetch(`https://restapi.fr/api/articles/${articleId}`);
-      console.log(response);
-
-      if (response.status < 300) {
-         const article = await response.json();
-         fillForm(article);
-         console.log(article);
+      if (articleId.startsWith("fake-article-")) {
+         // Préremplir le formulaire avec le fake article
+         const article = fakeArticles.find(a => a._id === articleId);
+         if (article) fillForm(article);
+      } else {
+         const response = await fetch(`https://restapi.fr/api/articles/${articleId}`);
+         if (response.status < 300) {
+            const article = await response.json();
+            fillForm(article);
+         }
       }
    }
 };
